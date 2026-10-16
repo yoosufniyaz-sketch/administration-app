@@ -1,0 +1,10 @@
+rules_version = '2';
+// Starting point for your own Firebase project: only signed-in users can read or write.
+// Tighten these for production (for example, admin-only writes to the *_meta collection).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
